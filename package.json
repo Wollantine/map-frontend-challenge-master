@@ -5,10 +5,12 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --open && node index.js"
+    "start": "webpack-dev-server --open && node index.js",
+    "test": "mocha --require requireBabelRegister.js --recursive \"src/**/*.test.*\"",
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.0.0-beta.51",
+    "@types/mocha": "^5.2.2",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.1",
@@ -19,10 +21,15 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
     "@babel/preset-typescript": "^7.0.0-beta.51",
+    "@babel/register": "^7.0.0-beta.51",
     "babel-loader": "^8.0.0-beta",
+    "chai": "^4.1.2",
     "clean-webpack-plugin": "^0.1.19",
     "html-webpack-plugin": "^3.2.0",
+    "mocha": "^5.2.0",
+    "tsc": "^1.20150623.0",
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.7",
     "webpack-dev-server": "^3.1.4"
