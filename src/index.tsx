@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App';
 
 const rootDiv = (id: string) => {
     const div = document.createElement('div');
@@ -10,4 +11,4 @@ const rootDiv = (id: string) => {
 const appElement = rootDiv('app');
 document.body.appendChild(appElement);
 
-ReactDOM.render(<span>Hola món!</span>, appElement);
+ReactDOM.render(<App/>, appElement);
