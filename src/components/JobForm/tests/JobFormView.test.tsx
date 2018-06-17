@@ -4,7 +4,9 @@ import {render} from 'enzyme';
 import JobFormView, {EFieldStatus} from '../JobFormView';
 
 describe('<JobFormView/>', () => {
-    const emptyField = {value: '', status: EFieldStatus.pristine, onChange: () => {}};
+    const emptyField = { value: '', status: EFieldStatus.pristine, onChange: () => { } };
+    const validField = { value: '', status: EFieldStatus.valid, onChange: () => { } };
+    const invalidField = { value: '', status: EFieldStatus.invalid, onChange: () => { } };
 
     it('should render two input fields', () => {
         const wrapper = render(
@@ -13,7 +15,7 @@ describe('<JobFormView/>', () => {
                 dropoffInput={emptyField}
             />
         );
-        expect(wrapper.find('input')).to.have.length(2);
+        expect(wrapper).to.have.exactly(2).descendants('input');
     });
 
     it('should render a disabled button by default', () => {
@@ -23,11 +25,27 @@ describe('<JobFormView/>', () => {
                 dropoffInput={emptyField}
             />
         );
-        expect(wrapper.find('button').is('[disabled]')).to.be.true;
+        expect(wrapper.find('button')).to.have.attr('disabled');
     });
 
     it('should render an enabled button when both inputs are right', () => {
-        
+        const wrapper = render(
+            <JobFormView
+                pickupInput={validField}
+                dropoffInput={validField}
+            />
+        );
+        expect(wrapper.find('button')).to.not.have.attr('disabled');
+    });
+
+    it('should render a disabled button if not all the inputs are valid', () => {
+        const wrapper = render(
+            <JobFormView
+                pickupInput={invalidField}
+                dropoffInput={validField}
+            />
+        );
+        expect(wrapper.find('button')).to.have.attr('disabled');
     });
 
     it('should render a grey icon if the input is pristine', () => {

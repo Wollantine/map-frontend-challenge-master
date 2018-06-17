@@ -2,8 +2,8 @@ import * as React from 'react';
 
 export enum EFieldStatus {
     pristine,
-    error,
-    success,
+    invalid,
+    valid,
 }
 
 type TFieldProps<T> = {
