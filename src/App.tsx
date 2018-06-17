@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import JobForm from './components/JobForm';
 import Map from './components/Map';
 

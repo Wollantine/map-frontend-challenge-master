@@ -4,9 +4,10 @@
         "noEmit": true,
         "strict": true,
         "pretty": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "jsx": "preserve"
     },
     "exclude": [
-        "node_modules"
+        "./node_modules/**/*"
     ]
 }
