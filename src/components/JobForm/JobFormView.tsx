@@ -12,6 +12,4 @@ interface IProps {
     isButtonCreating: boolean;
 }
 
-const JobFormView: React.StatelessComponent<IProps> = () => <p>Hi!</p>;
-
-export default JobFormView;
+export const JobFormView: React.StatelessComponent<IProps> = () => <p>Hi!</p>;

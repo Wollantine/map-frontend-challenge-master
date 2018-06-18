@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {expect} from 'chai';
 import {render} from 'enzyme';
-import JobFormView, {EFieldStatus} from '../JobFormView';
+import {JobFormView} from '../JobFormView';
+import { EFieldStatus } from '../redux/jobFormState';
 
 describe('<JobFormView/>', () => {
     const emptyField = { value: '', status: EFieldStatus.pristine, onChange: () => { } };
@@ -46,35 +47,5 @@ describe('<JobFormView/>', () => {
             />
         );
         expect(wrapper.find('button')).to.have.attr('disabled');
-    });
-
-    it('should render a grey icon if the input is pristine', () => {
-        const wrapper = render(
-            <JobFormView
-                pickupInput={emptyField}
-                dropoffInput={emptyField}
-            />
-        );
-        expect(wrapper.children('img').last()).to.have.attr('src', '/assets/dropOffBadgeBlank.svg');
-    });
-
-    it('should render a red icon if the input has error', () => {
-        const wrapper = render(
-            <JobFormView
-                pickupInput={emptyField}
-                dropoffInput={invalidField}
-            />
-        );
-        expect(wrapper.children('img').last()).to.have.attr('src', '/assets/dropOffBadgeError.svg');
-    });
-
-    it('should render a green icon if the input is a success', () => {
-        const wrapper = render(
-            <JobFormView
-                pickupInput={emptyField}
-                dropoffInput={validField}
-            />
-        );
-        expect(wrapper.children('img').last()).to.have.attr('src', '/assets/dropOffBadgePresent.svg');
     });
 });
