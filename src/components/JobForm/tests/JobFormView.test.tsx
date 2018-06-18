@@ -49,14 +49,32 @@ describe('<JobFormView/>', () => {
     });
 
     it('should render a grey icon if the input is pristine', () => {
-        
+        const wrapper = render(
+            <JobFormView
+                pickupInput={emptyField}
+                dropoffInput={emptyField}
+            />
+        );
+        expect(wrapper.children('img').last()).to.have.attr('src', '/assets/dropOffBadgeBlank.svg');
     });
 
     it('should render a red icon if the input has error', () => {
-        
+        const wrapper = render(
+            <JobFormView
+                pickupInput={emptyField}
+                dropoffInput={invalidField}
+            />
+        );
+        expect(wrapper.children('img').last()).to.have.attr('src', '/assets/dropOffBadgeError.svg');
     });
 
     it('should render a green icon if the input is a success', () => {
-        
+        const wrapper = render(
+            <JobFormView
+                pickupInput={emptyField}
+                dropoffInput={validField}
+            />
+        );
+        expect(wrapper.children('img').last()).to.have.attr('src', '/assets/dropOffBadgePresent.svg');
     });
 });
