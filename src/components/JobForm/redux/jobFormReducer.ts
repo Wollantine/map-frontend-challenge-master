@@ -1,20 +1,10 @@
-import {combineReducers, Reducer} from 'redux';
-
-export enum EFieldStatus {
-    pristine,
-    invalid,
-    valid,
-}
+import {combineReducers} from 'redux';
+import {TField, EFieldStatus} from './jobFormState';
 
 export type TAction = {
     [key: string]: any;
     type: string;
 }
-
-export type TField<T> = {
-    value: T;
-    status: EFieldStatus;
-};
 
 const emptyField = <T>(value: T) => ({value, status: EFieldStatus.pristine});
 
@@ -33,6 +23,7 @@ export const creating = (state: boolean = false, action: TAction): boolean => {
             return state;
     }
 };
+
 
 export const jobFormReducer = combineReducers({
     pickup: fieldReducer<string>('pickup', ''),

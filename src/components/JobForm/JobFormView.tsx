@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { TField } from './redux/jobFormReducer';
+import {TField} from './redux/jobFormState';
 
 export type TFieldProps<T> = TField<T> & {
     onChange: (value: T) => void;
 };
 
 interface IProps {
-    pickupInput: TField<string>;
-    dropoffInput: TField<string>;
+    pickupInput: TFieldProps<string>;
+    dropoffInput: TFieldProps<string>;
+    isButtonDisabled: boolean;
+    isButtonCreating: boolean;
 }
 
 const JobFormView: React.StatelessComponent<IProps> = () => <p>Hi!</p>;
