@@ -1,4 +1,4 @@
-import {IJobFormState} from '../components/JobForm/redux/jobFormReducer';
+import {IJobFormState} from '../components/JobForm/redux/jobFormState';
 
 export interface IState {
     jobForm: IJobFormState;
