@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {expect} from 'chai';
-import {render} from 'enzyme';
+import {shallow} from 'enzyme';
 import {JobFormLogic} from '../JobForm';
-import { EFieldStatus } from '../redux/jobFormState';
+import { EFieldStatus } from '../redux/field';
+import { JobFormView as JFV } from '../JobFormView';
+const JobFormView = JFV as any;
 
 describe('<JobForm/>', () => {
     const noOp = () => {};
@@ -10,51 +12,55 @@ describe('<JobForm/>', () => {
     const validField = { value: '', status: EFieldStatus.valid };
     const invalidField = { value: '', status: EFieldStatus.invalid };
 
-    it('should render two input fields', () => {
-        const wrapper = render(
+    it('should render a JobFormView', () => {
+        const wrapper = shallow(
             <JobFormLogic
                 pickupInput={emptyField}
                 dropoffInput={emptyField}
+                isCreating={false}
                 onPickupChange={noOp}
                 onDropoffChange={noOp}
             />
         );
-        expect(wrapper).to.have.exactly(2).descendants('input');
+        expect(wrapper).to.containMatchingElement(<JobFormView/>);
     });
 
     it('should render a disabled button by default', () => {
-        const wrapper = render(
+        const wrapper = shallow(
             <JobFormLogic
                 pickupInput={emptyField}
                 dropoffInput={emptyField}
+                isCreating={false}
                 onPickupChange={noOp}
                 onDropoffChange={noOp}
             />
         );
-        expect(wrapper.find('button')).to.have.attr('disabled');
+        expect(wrapper).to.containMatchingElement(<JobFormView isButtonDisabled={true}/>);
     });
 
     it('should render an enabled button when both inputs are right', () => {
-        const wrapper = render(
+        const wrapper = shallow(
             <JobFormLogic
                 pickupInput={validField}
                 dropoffInput={validField}
+                isCreating={false}
                 onPickupChange={noOp}
                 onDropoffChange={noOp}
             />
         );
-        expect(wrapper.find('button')).to.not.have.attr('disabled');
+        expect(wrapper).to.containMatchingElement(<JobFormView isButtonDisabled={false} />);
     });
 
     it('should render a disabled button if not all the inputs are valid', () => {
-        const wrapper = render(
+        const wrapper = shallow(
             <JobFormLogic
                 pickupInput={invalidField}
                 dropoffInput={validField}
+                isCreating={false}
                 onPickupChange={noOp}
                 onDropoffChange={noOp}
             />
         );
-        expect(wrapper.find('button')).to.have.attr('disabled');
+        expect(wrapper).to.containMatchingElement(<JobFormView isButtonDisabled={true} />);
     });
 });

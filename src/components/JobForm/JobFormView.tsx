@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {TField} from './redux/jobFormState';
+import {TField} from './redux/field';
 
 export type TFieldProps<T> = TField<T> & {
     onChange: (value: T) => void;

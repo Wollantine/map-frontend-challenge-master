@@ -1,15 +1,6 @@
 import {IState, jobFormSelector} from '../../../redux/appState';
+import { TField } from './field';
 
-export enum EFieldStatus {
-    pristine,
-    invalid,
-    valid,
-}
-
-export type TField<T> = {
-    value: T;
-    status: EFieldStatus;
-};
 
 export interface IJobFormState {
     pickup: TField<string>;

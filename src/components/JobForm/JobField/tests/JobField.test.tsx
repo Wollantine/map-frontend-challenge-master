@@ -2,9 +2,9 @@ import * as React from 'react';
 import { expect } from 'chai';
 import { render } from 'enzyme';
 import {JobField, IProps} from '../JobField';
-import { EFieldStatus } from '../../redux/jobFormState';
+import { EFieldStatus } from '../../redux/field';
 
-describe('JobField', () => {
+describe('<JobField/>', () => {
     const icon = 'test.svg';
     const invalidIcon = 'testInvalid.svg';
     const validIcon = 'testValid.svg';

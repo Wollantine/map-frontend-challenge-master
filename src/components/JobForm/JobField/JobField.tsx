@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EFieldStatus } from '../redux/jobFormState';
+import { EFieldStatus } from '../redux/field';
 
 export interface IProps {
     value: string;

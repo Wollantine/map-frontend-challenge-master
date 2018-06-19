@@ -2,7 +2,7 @@ import * as React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { JobFormView } from '../JobFormView';
-import { EFieldStatus } from '../redux/jobFormState';
+import { EFieldStatus } from '../redux/field';
 import { JobField } from '../JobField/JobField';
 
 describe('<JobFormView/>', () => {
