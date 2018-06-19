@@ -18,6 +18,11 @@ describe('<JobField/>', () => {
         onChange: () => {},
     };
 
+    it('should render an input', () => {
+        const wrapper = render(<JobField {...props} />);
+        expect(wrapper).to.have.exactly(1).descendants('input');
+    });
+
     it('should render the icon if the input is pristine', () => {
         const wrapper = render(<JobField {...props}/>);
         expect(wrapper.children('img').last()).to.have.attr('src', icon);
