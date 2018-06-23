@@ -1,7 +1,7 @@
-Stuart frontend challenge
+Map frontend challenge
 =========================
 
-Create a `React.js` app that allows users to create Stuart jobs.
+Create a `React.js` app that allows users to create jobs.
 
 ## Specs
 
@@ -61,5 +61,3 @@ How would you improve the app? Write in a few lines how do you think the app can
 - Use [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/get-api-key).
 - App must work in the latest Chrome version.
 - Source code must be hosted on git (You can create a free repository in Github, [Gitlab](https://gitlab.com) or [Bitbucket](https://bitbucket.org)).
-- Once you are done, send a email to j.oliger@stuart.com with: a link to the git repository, the time spent on the project and a list of any issues you encountered while doing the challenge.
-- Please contact us if you have any question.
