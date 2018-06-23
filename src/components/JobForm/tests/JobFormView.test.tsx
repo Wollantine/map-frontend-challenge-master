@@ -5,6 +5,7 @@ import { JobFormView } from '../JobFormView';
 import { EFieldStatus } from '../redux/field';
 import { JobField } from '../JobField/JobField';
 
+
 describe('<JobFormView/>', () => {
     const emptyField = { value: '', status: EFieldStatus.pristine, onChange: () => {} };
 
