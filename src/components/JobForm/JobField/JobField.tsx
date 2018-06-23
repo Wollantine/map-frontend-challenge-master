@@ -29,8 +29,9 @@ const Input = createComponent(({value}) => ({
     background: '#F0F3F7',
     color: value === '' ? '#252525' : '#8596A6',
     border: 'none',
-    fontSize: 'medium',
+    fontSize: 'small',
     paddingLeft: '7px',
+    width: '100%',
 }), 'input', ['type', 'placeholder', 'onChange']);
 
 export const JobField: React.StatelessComponent<IProps> = (props) => {
