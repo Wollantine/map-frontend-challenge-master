@@ -18,7 +18,8 @@ describe('jobFormReducer', () => {
 
             it('should return a TField', () => {
                 const state = reducer(undefined, {type: 'UNDEFINED_ACTION'});
-                expect(state).to.have.property('value').and.property('status');
+                expect(state).to.have.property('value');
+                expect(state).to.have.property('status');
             });
 
             it('should use initialState as default value and pristine as default status', () => {
@@ -33,7 +34,7 @@ describe('jobFormReducer', () => {
             });
 
             it('should not update anything if the fieldName is not the same', () => {
-                const action = updateField(name, 'b', EFieldStatus.invalid);
+                const action = updateField('anotherFieldName', 'b', EFieldStatus.invalid);
                 const state = {value: 'a', status: EFieldStatus.pristine};
                 expect(reducer(state, action)).to.deep.equal(state);
             });
