@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {TField, EFieldStatus} from './jobFormState';
+import {TField, EFieldStatus} from './field';
 
 export type TAction = {
     [key: string]: any;
