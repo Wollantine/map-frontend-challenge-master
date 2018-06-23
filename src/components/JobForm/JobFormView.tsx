@@ -22,6 +22,7 @@ interface IProps {
 
 const Div = createComponent(() => ({
     width: '300px',
+    backgroundColor: 'white',
     padding: '16px',
     marginTop: '32px',
     marginLeft: '32px',

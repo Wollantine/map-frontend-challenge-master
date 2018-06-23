@@ -32,7 +32,7 @@ const Input = createComponent(({value}) => ({
     fontSize: 'small',
     paddingLeft: '7px',
     width: '100%',
-}), 'input', ['type', 'placeholder', 'onChange']);
+}), 'input', ['type', 'placeholder', 'value', 'onChange']);
 
 export const JobField: React.StatelessComponent<IProps> = (props) => {
     const {value, placeholder, onChange, status, icon, validIcon, invalidIcon} = props;
