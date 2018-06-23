@@ -2,7 +2,7 @@ require('@babel/register')({
     extensions: ['.ts', '.js', '.tsx', '.jsx'],
     plugins: [
         [
-            'babel-plugin-transform-require-ignore',
+            'babel-plugin-transform-require-ignore-assign',
             {
                 extensions: ['.svg']
             }
