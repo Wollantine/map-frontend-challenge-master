@@ -2,6 +2,7 @@ import * as React from 'react';
 import {TField} from './redux/field';
 import { JobField } from './JobField/JobField';
 import { createComponent } from 'react-fela';
+import { CreateJobButton } from './CreateJobButton/CreateJobButton';
 const pickupBadgeBlank = require('../../../assets/pickUpBadgeBlank.svg');
 const pickupBadgeError = require('../../../assets/pickUpBadgeError.svg');
 const pickupBadgePresent = require('../../../assets/pickUpBadgePresent.svg');
@@ -16,8 +17,6 @@ export type TFieldProps<T> = TField<T> & {
 interface IProps {
     pickupInput: TFieldProps<string>;
     dropoffInput: TFieldProps<string>;
-    isButtonDisabled: boolean;
-    isButtonCreating: boolean;
 }
 
 const Div = createComponent(() => ({
@@ -34,23 +33,9 @@ const Div = createComponent(() => ({
     }
 }));
 
-const ButtonContainer = createComponent(() => ({
-    marginLeft: '40px',
-}));
-
-const Button = createComponent(() => ({
-    borderRadius: '4px',
-    height: '40px',
-    textShadow: '0 1px 2px 0 rgba(16,162,234,0.30)',
-    background: 'linear-gradient(#10A2EA, #0F99E8)',
-    color: 'white',
-    border: 'none',
-    width: '100%',
-    fontSize: 'small',
-}), 'button', ['onClick', 'disabled']);
 
 export const JobFormView: React.StatelessComponent<IProps> = (props) => {
-    const {pickupInput, dropoffInput, isButtonCreating, isButtonDisabled} = props;
+    const {pickupInput, dropoffInput} = props;
     return (
         <Div>
             <JobField
@@ -67,11 +52,7 @@ export const JobFormView: React.StatelessComponent<IProps> = (props) => {
                 invalidIcon={dropoffBadgeError}
                 validIcon={dropoffBadgePresent}
             />
-            <ButtonContainer>
-                <Button onClick={() => {}} disabled={isButtonDisabled}>
-                    {isButtonCreating ? 'Creating...' : 'Create Job'}
-                </Button>
-            </ButtonContainer>
+            <CreateJobButton/>
         </Div>
     );
 };

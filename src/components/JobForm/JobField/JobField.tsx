@@ -27,7 +27,7 @@ const Input = createComponent(({value}) => ({
     borderRadius: '4px',
     height: '32px',
     background: '#F0F3F7',
-    color: value === '' ? '#252525' : '#8596A6',
+    color: value === '' ? '#8596A6' : '#252525',
     border: 'none',
     fontSize: 'small',
     paddingLeft: '7px',

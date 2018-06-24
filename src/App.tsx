@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStore } from 'redux';
 import { Provider as ReduxProvider } from 'react-redux'
-import JobForm from './components/JobForm/JobForm';
+import { JobForm } from './components/JobForm/JobForm';
 import Map from './components/Map/Map';
 import { appReducer } from './redux/appReducer';
 import { createRenderer } from 'fela';
