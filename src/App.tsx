@@ -1,15 +1,22 @@
 import * as React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider as ReduxProvider } from 'react-redux'
 import { JobForm } from './components/JobForm/JobForm';
 import Map from './components/Map/Map';
 import { appReducer } from './redux/appReducer';
 import { createRenderer } from 'fela';
 import { Provider as FelaProvider } from 'react-fela';
+import createSagaMiddleware from 'redux-saga';
 
 
-const store = createStore(appReducer);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+    appReducer,
+    applyMiddleware(sagaMiddleware),
+);
 const renderer = createRenderer();
+
+sagaMiddleware.run(appSaga);
 
 const App = () => (
     <ReduxProvider store={store}>
