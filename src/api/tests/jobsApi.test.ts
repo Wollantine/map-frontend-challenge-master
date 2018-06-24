@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import { EErrorType, processedError } from './jobsApi';
+import { EErrorType, processedError } from '../jobsApi';
 
 describe('jobsApi', () => {
     describe('processedError', () => {

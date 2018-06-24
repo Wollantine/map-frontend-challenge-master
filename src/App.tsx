@@ -7,6 +7,7 @@ import { appReducer } from './redux/appReducer';
 import { createRenderer } from 'fela';
 import { Provider as FelaProvider } from 'react-fela';
 import createSagaMiddleware from 'redux-saga';
+import { appSaga } from './redux/appSaga';
 
 
 const sagaMiddleware = createSagaMiddleware();
