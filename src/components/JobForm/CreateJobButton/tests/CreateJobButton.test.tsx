@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import { CreateJobButtonLogic } from './CreateJobButton';
-import { CreateJobButtonView as CJBV } from './CreateJobButtonView';
-import { EFieldStatus } from '../redux/field';
+import { CreateJobButtonLogic } from '../CreateJobButton';
+import { CreateJobButtonView as CJBV } from '../CreateJobButtonView';
+import { EFieldStatus } from '../../redux/field';
 const CreateJobButtonView = CJBV as any;
 
 describe('<CreateJobButton/>', () => {
