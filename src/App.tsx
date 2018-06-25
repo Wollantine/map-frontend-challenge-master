@@ -8,12 +8,13 @@ import { createRenderer } from 'fela';
 import { Provider as FelaProvider } from 'react-fela';
 import createSagaMiddleware from 'redux-saga';
 import { appSaga } from './redux/appSaga';
+const logger: any = require('redux-logger').default;
 
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
     appReducer,
-    applyMiddleware(sagaMiddleware),
+    applyMiddleware(sagaMiddleware, logger),
 );
 const renderer = createRenderer();
 

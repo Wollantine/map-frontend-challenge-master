@@ -12,6 +12,7 @@ const dropoffBadgePresent = require('../../../assets/dropOffBadgePresent.svg');
 
 export type TFieldProps<T> = TField<T> & {
     onChange: (value: T) => void;
+    onBlur: () => void;
 };
 
 interface IProps {

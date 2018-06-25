@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import { fieldReducer, creating } from "../jobFormReducer";
 import { EFieldStatus } from '../field';
-import { updateField, startCreatingJob, finishCreatingJob } from '../jobFormActions';
+import { updateField, startCreatingJob, finishCreatingJob, updateGeocode } from '../jobFormActions';
 
 describe('jobFormReducer', () => {
     describe('fieldReducer', () => {
@@ -49,6 +49,12 @@ describe('jobFormReducer', () => {
                 const action = updateField(name, null, EFieldStatus.invalid);
                 const newState = reducer({value: 'a', status: EFieldStatus.valid}, action);
                 expect(newState).to.deep.equal({value: 'a', status: EFieldStatus.invalid});
+            });
+
+            it('should update status to valid on UPDATE_GEOCODE', () => {
+                const action = updateGeocode(name, {address: 'a', latitude: 0, longitude: 0});
+                const newState = reducer({value: 'a', status: EFieldStatus.invalid}, action);
+                expect(newState.status).to.equal(EFieldStatus.valid);
             });
         });
     });

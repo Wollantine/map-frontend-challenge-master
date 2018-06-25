@@ -4,4 +4,6 @@ export interface IState {
     jobForm: IJobFormState;
 }
 
-export const jobFormSelector = (state: IState): IJobFormState => state.jobForm;
+export type TSelector<T> = (state: IState) => T;
+
+export const jobFormSelector: TSelector<IJobFormState> = (state) => state.jobForm;

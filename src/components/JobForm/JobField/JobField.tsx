@@ -11,6 +11,7 @@ export interface IProps {
     validIcon: string;
     invalidIcon: string;
     onChange: (value: string) => void;
+    onBlur: () => void;
 }
 
 const Div = createComponent(() => ({
@@ -32,10 +33,10 @@ const Input = createComponent(({value}) => ({
     fontSize: 'small',
     paddingLeft: '7px',
     width: '100%',
-}), 'input', ['type', 'placeholder', 'value', 'onChange']);
+}), 'input', ['type', 'placeholder', 'value', 'onChange', 'onBlur']);
 
 export const JobField: React.StatelessComponent<IProps> = (props) => {
-    const {value, placeholder, onChange, status, icon, validIcon, invalidIcon} = props;
+    const {value, placeholder, onChange, onBlur, status, icon, validIcon, invalidIcon} = props;
     const image = {
         [EFieldStatus.pristine]: icon,
         [EFieldStatus.valid]: validIcon,
@@ -45,7 +46,13 @@ export const JobField: React.StatelessComponent<IProps> = (props) => {
     return (
         <Div>
             <Image src={image}/>
-            <Input type="text" value={value} placeholder={placeholder} onChange={changeHolder}/>
+            <Input
+                type="text"
+                value={value}
+                placeholder={placeholder}
+                onChange={changeHolder}
+                onBlur={onBlur}
+            />
         </Div>
     );
 }

@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { isFieldValid, TField } from '../redux/field';
 import { CreateJobButtonView } from './CreateJobButtonView';
 import { IState } from '../../../redux/appState';
-import { startCreatingJob } from '../redux/JobFormActions';
+import { startCreatingJob } from '../redux/jobFormActions';
 import { connect } from 'react-redux';
 
 export interface IStateProps {

@@ -17,6 +17,8 @@ describe('<JobForm/>', () => {
                 dropoffInput={emptyField}
                 onPickupChange={noOp}
                 onDropoffChange={noOp}
+                onPickupBlur={noOp}
+                onDropoffBlur={noOp}
             />
         );
         expect(wrapper).to.containMatchingElement(<JobFormView/>);

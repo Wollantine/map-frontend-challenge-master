@@ -8,7 +8,8 @@ import { CreateJobButton } from '../CreateJobButton/CreateJobButton';
 
 
 describe('<JobFormView/>', () => {
-    const emptyField = { value: '', status: EFieldStatus.pristine, onChange: () => {} };
+    const noOp = () => {};
+    const emptyField = { value: '', status: EFieldStatus.pristine, onChange: noOp, onBlur: noOp};
 
     it('should render two JobFields', () => {
         const wrapper = shallow(

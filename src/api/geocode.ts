@@ -1,6 +1,5 @@
 import {Either} from 'tsmonad';
 import * as R from 'ramda';
-import { axios } from '../config/axios';
 import { TError, processedError, unexpectedDataError } from './jobsApi';
 
 export type TGeocode = {
@@ -11,14 +10,13 @@ export type TGeocode = {
 
 export const GEOCODE_ENDPOINT = '/geocode';
 
-// axios.post(GEOCODE_ENDPOINT, {address})
-export const geocodeAddress = (responsePromise: Promise<TGeocode | any>): Promise<Either<TError, TGeocode>> => {
+export function geocodeAddress(responsePromise: Promise<TGeocode | any>): Promise<Either<TError, TGeocode>> {
     return responsePromise.then((response) => {
         return geocodeOrError(R.propOr({}, 'data', response));
     }).catch((error) => {
         return processedError(error);
     });
-};
+}
 
 export function isGeocode(data: any): data is TGeocode {
     return !R.isNil(data) &&
