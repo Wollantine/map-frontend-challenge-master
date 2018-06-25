@@ -58,4 +58,16 @@ describe('<CreateJobButton/>', () => {
         );
         expect(wrapper).to.containMatchingElement(<CreateJobButtonView text="Creating..."/>);
     });
+    
+    it('should be disabled when it is creating', () => {
+        const wrapper = shallow(
+            <CreateJobButtonLogic
+                pickupInput={validField}
+                dropoffInput={validField}
+                isCreating={true}
+                onCreateJobClick={noOp}
+            />
+        );
+        expect(wrapper).to.containMatchingElement(<CreateJobButtonView disabled={true}/>);
+    });
 });

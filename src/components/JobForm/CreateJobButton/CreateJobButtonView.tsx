@@ -11,7 +11,7 @@ const ButtonContainer = createComponent(() => ({
     marginLeft: '40px',
 }));
 
-const Button = createComponent(() => ({
+const Button = createComponent(({disabled}) => ({
     borderRadius: '4px',
     height: '40px',
     textShadow: '0 1px 2px 0 rgba(16,162,234,0.30)',
@@ -20,6 +20,8 @@ const Button = createComponent(() => ({
     border: 'none',
     width: '100%',
     fontSize: 'small',
+    opacity: disabled ? 0.5 : 1,
+    cursor: disabled ? 'initial' : 'pointer',
 }), 'button', ['onClick', 'disabled']);
 
 export const CreateJobButtonView: React.StatelessComponent<IProps> = ({disabled, text, onClick}) => (

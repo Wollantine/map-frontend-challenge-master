@@ -18,7 +18,8 @@ interface IActionProps {
 
 export const CreateJobButtonLogic: React.StatelessComponent<IStateProps & IActionProps> = (props) => {
     const {pickupInput, dropoffInput, isCreating, onCreateJobClick} = props;
-    const isButtonDisabled = !(isFieldValid(pickupInput) && isFieldValid(dropoffInput));
+    const areFieldsValid = isFieldValid(pickupInput) && isFieldValid(dropoffInput);
+    const isButtonDisabled = !areFieldsValid || isCreating;
     const buttonText = isCreating ? 'Creating...' : 'Create Job';
     return (
         <CreateJobButtonView
