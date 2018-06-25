@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {TField, EFieldStatus} from './field';
-import { START_CREATING_JOB, FINISH_CREATING_JOB, UPDATE_FIELD } from './JobFormActions';
+import { START_CREATING_JOB, FINISH_CREATING_JOB, UPDATE_FIELD } from './jobFormActions';
+import * as R from 'ramda';
 
 export type TAction = {
     [key: string]: any;
@@ -13,9 +14,14 @@ export const fieldReducer = <T>(fieldName: string, initialValue: T) => (
     (state: TField<T> = emptyField(initialValue), action: TAction): TField<T> => {
         switch (action.type) {
             case UPDATE_FIELD:
+                const {value, status} = action;
                 const isSameField = action.fieldName === fieldName;
                 return isSameField
-                    ? {value: action.value, status: action.status}
+                    ? {
+                        ...state,
+                        ...(R.isNil(value) ? {} : {value}),
+                        ...(R.isNil(status) ? {} : {status}),
+                    }
                     : state;
             default:
                 return state;

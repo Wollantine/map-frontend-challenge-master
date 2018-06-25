@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import { fieldReducer, creating } from "../jobFormReducer";
 import { EFieldStatus } from '../field';
-import { updateField, startCreatingJob, finishCreatingJob } from '../JobFormActions';
+import { updateField, startCreatingJob, finishCreatingJob } from '../jobFormActions';
 
 describe('jobFormReducer', () => {
     describe('fieldReducer', () => {
@@ -37,6 +37,18 @@ describe('jobFormReducer', () => {
                 const action = updateField('anotherFieldName', 'b', EFieldStatus.invalid);
                 const state = {value: 'a', status: EFieldStatus.pristine};
                 expect(reducer(state, action)).to.deep.equal(state);
+            });
+
+            it('should update only status if value is null', () => {
+                const action = updateField(name, 'b', null);
+                const newState = reducer({value: 'a', status: EFieldStatus.valid}, action);
+                expect(newState).to.deep.equal({value: 'b', status: EFieldStatus.valid});
+            });
+
+            it('should update only value if status is null', () => {
+                const action = updateField(name, null, EFieldStatus.invalid);
+                const newState = reducer({value: 'a', status: EFieldStatus.valid}, action);
+                expect(newState).to.deep.equal({value: 'a', status: EFieldStatus.invalid});
             });
         });
     });
