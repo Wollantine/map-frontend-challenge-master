@@ -1,5 +1,5 @@
 import {IState, jobFormSelector} from '../../../redux/appState';
-import { TField } from './field';
+import { TField, EFieldStatus } from './field';
 
 
 export interface IJobFormState {
@@ -7,6 +7,8 @@ export interface IJobFormState {
     dropoff: TField<string>;
     creating: boolean;
 }
+
+export const emptyField = <T>(value: T) => ({value, status: EFieldStatus.pristine});
 
 export const pickupSelector = (state: IState) => jobFormSelector(state).pickup;
 export const dropoffSelector = (state: IState) => jobFormSelector(state).dropoff;

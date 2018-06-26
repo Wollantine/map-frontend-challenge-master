@@ -1,16 +1,14 @@
 import {combineReducers} from 'redux';
 import {TField, EFieldStatus} from './field';
 import { START_CREATING_JOB, FINISH_CREATING_JOB, UPDATE_FIELD, UPDATE_GEOCODE, VALIDATE_FIELD } from './jobFormActions';
-import * as R from 'ramda';
 import { TReducer } from '../../../redux/appReducer';
-import { reduceWhen } from '../../../redux/genericReducers';
+import { reduceWhen, actionHasField } from '../../../redux/genericReducers';
+import { emptyField } from './jobFormState';
 
 export type TAction = {
     [key: string]: any;
     type: string;
 }
-
-const emptyField = <T>(value: T) => ({value, status: EFieldStatus.pristine});
 
 const field = <T>(initialValue: T): TReducer<TField<T>> => (
     (state: TField<T> = emptyField(initialValue), action: TAction): TField<T> => {
@@ -43,8 +41,6 @@ export const creating = (state: boolean = false, action: TAction): boolean => {
             return state;
     }
 };
-
-const actionHasField = (fieldName: string) => (_: any, action: TAction) => action.fieldName === fieldName;
 
 export const fieldReducer = (
     fieldName: string,

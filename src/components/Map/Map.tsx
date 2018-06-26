@@ -1,17 +1,56 @@
 import * as React from 'react';
-import { GOOGLE_API_KEY } from '../../config/keys';
-const {GoogleApiWrapper, Map, Marker} = require('google-maps-react');
+import { connect } from 'react-redux';
+import { IState } from '../../redux/appState';
+import { Maybe } from 'tsmonad';
+import { TGeocode } from '../../api/geocode';
+import { pickupGeocodeSelector, dropoffGeocodeSelector } from './redux/MapState';
+import MapView, { IMarker, IMarkerIcon, IPosition } from './MapView';
+import * as R from 'ramda';
+const pickupMarkerIcon = require('../../../assets/pickUpMarker.svg');
+const dropoffMarkerIcon = require('../../../assets/dropOffMarker.svg');
 
-interface IProps {
-    google: any;
+
+interface IStateProps {
+    pickupGeocode: Maybe<TGeocode>;
+    dropoffGeocode: Maybe<TGeocode>;
 }
 
-const MapContainer: React.StatelessComponent<IProps> = ({google}) => (
-    <Map google={google} zoom={14}>
-        <Marker name={'Current location'} />
-    </Map>
-);
+const pickupIcon = {url: pickupMarkerIcon, anchor: null, scaledSize: null};
+const dropoffIcon = {url: dropoffMarkerIcon, anchor: null, scaledSize: null};
 
-export default GoogleApiWrapper({
-    apiKey: GOOGLE_API_KEY,
-})(MapContainer);
+const MapContainer: React.StatelessComponent<IStateProps> = ({pickupGeocode, dropoffGeocode}) => {
+    const allMarkers = [
+        pickupGeocode.caseOf({
+            nothing: () => null,
+            just: R.curry(geocodeToGoogleMarker)(pickupIcon),
+        }),
+        dropoffGeocode.caseOf({
+            nothing: () => null,
+            just: R.curry(geocodeToGoogleMarker)(dropoffIcon),
+        }),
+    ];
+    const markers = R.reject(R.isNil, allMarkers);
+    const center = centerOfPositions(R.map(R.prop('position'), markers)).valueOr(undefined as any);
+    return (
+        <MapView markers={markers} center={center}/>
+    );
+};
+
+function geocodeToGoogleMarker(icon: IMarkerIcon, geocode: TGeocode): IMarker {
+    return {
+        name: geocode.address,
+        position: {lat: geocode.latitude, lng: geocode.longitude},
+        icon,
+    };
+}
+
+function centerOfPositions(positions: IPosition[]): Maybe<IPosition> {
+    return Maybe.maybe(R.head(positions));
+}
+
+const mapStateToProps = (state: IState) => ({
+    pickupGeocode: pickupGeocodeSelector(state),
+    dropoffGeocode: dropoffGeocodeSelector(state),
+});
+
+export default connect(mapStateToProps)(MapContainer);
