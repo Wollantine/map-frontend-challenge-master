@@ -42,8 +42,8 @@ const mapStateToProps = (state: IState): IStateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): IActionProps => ({
-    onPickupChange: (value) => dispatch(updateField('pickup', value, EFieldStatus.pristine)),
-    onDropoffChange: (value) => dispatch(updateField('dropoff', value, EFieldStatus.pristine)),
+    onPickupChange: (value) => dispatch(updateField('pickup', value)),
+    onDropoffChange: (value) => dispatch(updateField('dropoff', value)),
     onPickupBlur: () => dispatch(blurField('pickup')),
     onDropoffBlur: () => dispatch(blurField('dropoff')),
 });

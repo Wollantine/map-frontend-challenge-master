@@ -1,4 +1,4 @@
-import { BLUR_FIELD, updateField, updateGeocode, UPDATE_FIELD } from './jobFormActions';
+import { BLUR_FIELD, updateField, updateGeocode, UPDATE_FIELD, validateField } from './jobFormActions';
 import {takeEvery, takeLatest, select, call, put} from 'redux-saga/effects';
 import { TAction } from '../../../redux/appReducer';
 import { pickupSelector, dropoffSelector } from './jobFormState';
@@ -28,7 +28,7 @@ function* checkAddress(action: TAction): TEffects {
     const responsePromise = post(GEOCODE_ENDPOINT, {address});
     const eitherGeocodeOrError = yield call(geocodeAddress, responsePromise);
     yield put(eitherGeocodeOrError.caseOf({
-        left: (error: TError) => (updateField(field, null, EFieldStatus.invalid)),
+        left: (error: TError) => (validateField(field, EFieldStatus.invalid)),
         right: (geocode: TGeocode) => (updateGeocode(field, geocode)),
     }));
 }

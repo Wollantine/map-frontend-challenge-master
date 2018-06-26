@@ -3,16 +3,22 @@ import * as R from 'ramda';
 import {TGeocode} from '../../../api/geocode';
 
 export const UPDATE_FIELD = 'UPDATE_FIELD';
+export const VALIDATE_FIELD = 'VALIDATE_FIELD';
 export const UPDATE_GEOCODE = 'UPDATE_GEOCODE';
 export const BLUR_FIELD = 'BLUR_FIELD';
 export const START_CREATING_JOB = 'START_CREATING_JOB';
 export const FINISH_CREATING_JOB = 'FINISH_CREATING_JOB';
 
-export const updateField = (fieldName: string, value?: any, status?: EFieldStatus | null) => ({
+export const updateField = (fieldName: string, value: any) => ({
     type: UPDATE_FIELD,
     fieldName,
-    ...(R.isNil(value) ? {} : {value}),
-    ...(R.isNil(status) ? {} : {status}),
+    value,
+});
+
+export const validateField = (fieldName: string, status: EFieldStatus) => ({
+    type: VALIDATE_FIELD,
+    fieldName,
+    status,
 });
 
 export const updateGeocode = (fieldName: string, geocode: TGeocode) => ({

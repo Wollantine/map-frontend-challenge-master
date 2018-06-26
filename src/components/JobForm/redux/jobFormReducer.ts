@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {TField, EFieldStatus} from './field';
-import { START_CREATING_JOB, FINISH_CREATING_JOB, UPDATE_FIELD, UPDATE_GEOCODE } from './jobFormActions';
+import { START_CREATING_JOB, FINISH_CREATING_JOB, UPDATE_FIELD, UPDATE_GEOCODE, VALIDATE_FIELD } from './jobFormActions';
 import * as R from 'ramda';
 import { TReducer } from '../../../redux/appReducer';
 import { reduceWhen } from '../../../redux/genericReducers';
@@ -16,12 +16,15 @@ const field = <T>(initialValue: T): TReducer<TField<T>> => (
     (state: TField<T> = emptyField(initialValue), action: TAction): TField<T> => {
         switch (action.type) {
             case UPDATE_FIELD:
-                const {value, status} = action;
+                return {
+                    status: EFieldStatus.pristine,
+                    value: action.value,
+                };
+            case VALIDATE_FIELD:
                 return {
                     ...state,
-                    ...(R.isNil(value) ? {} : {value}),
-                    ...(R.isNil(status) ? {} : {status}),
-                };
+                    status: action.status,
+                }
             case UPDATE_GEOCODE:
                 return {...state, status: EFieldStatus.valid};
             default:

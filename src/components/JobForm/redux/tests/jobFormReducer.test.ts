@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import { fieldReducer, creating } from "../jobFormReducer";
 import { EFieldStatus } from '../field';
-import { updateField, startCreatingJob, finishCreatingJob, updateGeocode } from '../jobFormActions';
+import { updateField, startCreatingJob, finishCreatingJob, updateGeocode, validateField } from '../jobFormActions';
 
 describe('jobFormReducer', () => {
     describe('fieldReducer', () => {
@@ -27,28 +27,28 @@ describe('jobFormReducer', () => {
                 expect(state).to.deep.equal({value: initialState, status: EFieldStatus.pristine});
             });
 
-            it('should update value and status on UPDATE_FIELD', () => {
-                const action = updateField(name, 'b', EFieldStatus.invalid);
+            it('should update value on UPDATE_FIELD', () => {
+                const action = updateField(name, 'b');
                 const newState = reducer({value: 'a', status: EFieldStatus.pristine}, action);
-                expect(newState).to.deep.equal({value: 'b', status: EFieldStatus.invalid});
+                expect(newState).to.deep.equal({value: 'b', status: EFieldStatus.pristine});
             });
 
-            it('should not update anything if the fieldName is not the same', () => {
-                const action = updateField('anotherFieldName', 'b', EFieldStatus.invalid);
+            it('should update status on VALIDATE_FIELD', () => {
+                const action = validateField(name, EFieldStatus.invalid);
+                const newState = reducer({value: 'a', status: EFieldStatus.pristine}, action);
+                expect(newState).to.deep.equal({value: 'a', status: EFieldStatus.invalid});
+            });
+
+            it('should not update anything on UPDATE_FIELD if the fieldName is not the same', () => {
+                const action = updateField('anotherFieldName', 'b');
                 const state = {value: 'a', status: EFieldStatus.pristine};
                 expect(reducer(state, action)).to.deep.equal(state);
             });
 
-            it('should update only status if value is null', () => {
-                const action = updateField(name, 'b', null);
-                const newState = reducer({value: 'a', status: EFieldStatus.valid}, action);
-                expect(newState).to.deep.equal({value: 'b', status: EFieldStatus.valid});
-            });
-
-            it('should update only value if status is null', () => {
-                const action = updateField(name, null, EFieldStatus.invalid);
-                const newState = reducer({value: 'a', status: EFieldStatus.valid}, action);
-                expect(newState).to.deep.equal({value: 'a', status: EFieldStatus.invalid});
+            it('should not update anything on VALIDATE_FIELD if the fieldName is not the same', () => {
+                const action = validateField('anotherFieldName', EFieldStatus.invalid);
+                const state = {value: 'a', status: EFieldStatus.pristine};
+                expect(reducer(state, action)).to.deep.equal(state);
             });
 
             it('should update status to valid on UPDATE_GEOCODE', () => {
