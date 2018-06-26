@@ -1,5 +1,5 @@
-import { BLUR_FIELD, updateField, updateGeocode } from './jobFormActions';
-import {takeEvery, select, call, put} from 'redux-saga/effects';
+import { BLUR_FIELD, updateField, updateGeocode, UPDATE_FIELD } from './jobFormActions';
+import {takeEvery, takeLatest, select, call, put} from 'redux-saga/effects';
 import { TAction } from '../../../redux/appReducer';
 import { pickupSelector, dropoffSelector } from './jobFormState';
 import * as R from 'ramda';
@@ -7,11 +7,19 @@ import { geocodeAddress, GEOCODE_ENDPOINT, TGeocode } from '../../../api/geocode
 import { post, TError } from '../../../api/jobsApi';
 import { TSelector } from '../../../redux/appState';
 import { EFieldStatus } from './field';
+import { delay } from 'redux-saga';
+import { TEffects } from '../../../redux/appSaga';
 
-type TEffects = IterableIterator<any>;
+const DEBOUNCE_TIME = 1000;
 
 export function* jobFormSaga(): TEffects {
     yield takeEvery(BLUR_FIELD, checkAddress);
+    yield takeLatest(UPDATE_FIELD, debounceAndCheckAddress);
+}
+
+function* debounceAndCheckAddress(action: TAction): TEffects {
+    yield call(delay, DEBOUNCE_TIME);
+    yield call(checkAddress, action);
 }
 
 function* checkAddress(action: TAction): TEffects {
