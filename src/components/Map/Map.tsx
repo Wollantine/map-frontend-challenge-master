@@ -30,7 +30,8 @@ const MapContainer: React.StatelessComponent<IStateProps> = ({pickupGeocode, dro
         }),
     ];
     const markers = R.reject(R.isNil, allMarkers);
-    const center = centerOfPositions(R.map(R.prop('position'), markers)).valueOr(undefined as any);
+    const positions: IPosition[] = R.map(R.prop('position'), markers);
+    const center = centerOfPositions(positions).valueOr(undefined as any);
     return (
         <MapView markers={markers} center={center}/>
     );
@@ -45,6 +46,7 @@ function geocodeToGoogleMarker(icon: IMarkerIcon, geocode: TGeocode): IMarker {
 }
 
 function centerOfPositions(positions: IPosition[]): Maybe<IPosition> {
+    // TODO: compute boundingBox of positions and return its center
     return Maybe.maybe(R.head(positions));
 }
 
