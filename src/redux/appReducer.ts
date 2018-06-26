@@ -6,6 +6,8 @@ export type TAction = {
     type: string;
 };
 
+export type TReducer<T> = (state: T | undefined, action: TAction) => T;
+
 export const appReducer = combineReducers({
     jobForm: jobFormReducer,
 });
