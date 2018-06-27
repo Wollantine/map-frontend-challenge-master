@@ -4,14 +4,11 @@ import { EToastType, IToast } from './redux/ToastState';
 import * as R from 'ramda';
 import { Transition } from 'react-spring';
 import { Maybe } from 'tsmonad';
-import { delay } from 'redux-saga';
 
 export interface IProps {
     maybeToast: Maybe<IToast>;
     onClick: () => void;
 }
-
-const DELAY = 50000;
 
 const toastColors = {
     [EToastType.error]: 'rgba(90, 30, 30, 0.90)',
@@ -39,15 +36,13 @@ const Toast = createComponent(({opacity, top, right, toastType}) => ({
     boxShadow: '0 1px 8px 0 rgba(0, 0, 0, 0.10)',
 }), 'div', ['onClick']);
 
-
-
 export const ToastView: React.StatelessComponent<IProps> = ({maybeToast, onClick}) => {
     const ToastComponent = (props: any) => (
         <Toast key="0" {...props} toastType={props.toast.toastType} onClick={onClick}>
             <span>{props.toast.message}</span>
         </Toast>
     );
-        
+
     return (
         <Transition
             from={{opacity: 0, top: '-100px', right: '32px'}}
