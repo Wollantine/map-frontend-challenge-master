@@ -1,4 +1,4 @@
-import { BLUR_FIELD, updateField, updateGeocode, UPDATE_FIELD, validateField, START_CREATING_JOB, finishCreatingJob } from './jobFormActions';
+import { BLUR_FIELD, updateGeocode, UPDATE_FIELD, validateField, START_CREATING_JOB, finishCreatingJob } from './jobFormActions';
 import {takeEvery, takeLatest, select, call, put} from 'redux-saga/effects';
 import { TAction } from '../../../redux/appReducer';
 import { pickupSelector, dropoffSelector } from './jobFormState';
