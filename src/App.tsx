@@ -8,6 +8,7 @@ import { createRenderer } from 'fela';
 import { Provider as FelaProvider } from 'react-fela';
 import createSagaMiddleware from 'redux-saga';
 import { appSaga } from './redux/appSaga';
+import { Toast } from './components/Toast/Toast';
 const logger: any = require('redux-logger').default;
 
 
@@ -26,6 +27,7 @@ const App = () => (
             <>
                 <Map/>
                 <JobForm/>
+                <Toast/>
             </>
         </FelaProvider>
     </ReduxProvider>

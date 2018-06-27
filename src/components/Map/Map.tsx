@@ -18,7 +18,7 @@ interface IStateProps {
 const pickupIcon = {url: pickupMarkerIcon, anchor: null, scaledSize: null};
 const dropoffIcon = {url: dropoffMarkerIcon, anchor: null, scaledSize: null};
 
-const MapContainer: React.StatelessComponent<IStateProps> = ({pickupGeocode, dropoffGeocode}) => {
+const MapLogic: React.StatelessComponent<IStateProps> = ({pickupGeocode, dropoffGeocode}) => {
     const allMarkers = [
         pickupGeocode.caseOf({
             nothing: () => null,
@@ -55,4 +55,4 @@ const mapStateToProps = (state: IState) => ({
     dropoffGeocode: dropoffGeocodeSelector(state),
 });
 
-export default connect(mapStateToProps)(MapContainer);
+export default connect(mapStateToProps)(MapLogic);
