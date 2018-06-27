@@ -2,8 +2,9 @@ import {combineReducers} from 'redux';
 import {TField, EFieldStatus} from './field';
 import { START_CREATING_JOB, FINISH_CREATING_JOB, UPDATE_FIELD, UPDATE_GEOCODE, VALIDATE_FIELD } from './jobFormActions';
 import { TReducer } from '../../../redux/appReducer';
-import { reduceWhen, actionHasField } from '../../../redux/genericReducers';
+import { reduceWhen, actionHasField, actionIs } from '../../../redux/genericReducers';
 import { emptyField } from './jobFormState';
+import * as R from 'ramda';
 
 export type TAction = {
     [key: string]: any;
@@ -25,6 +26,8 @@ const field = <T>(initialValue: T): TReducer<TField<T>> => (
                 }
             case UPDATE_GEOCODE:
                 return {...state, status: EFieldStatus.valid};
+            case FINISH_CREATING_JOB:
+                return emptyField(initialValue);
             default:
                 return state;
         }
@@ -46,7 +49,11 @@ export const fieldReducer = (
     fieldName: string,
     initialValue: string
 ): TReducer<TField<string>> => (
-    reduceWhen(actionHasField(fieldName), field(initialValue), emptyField(initialValue))
+    reduceWhen(
+        R.either(actionHasField(fieldName), actionIs(FINISH_CREATING_JOB)),
+        field(initialValue),
+        emptyField(initialValue)
+    )
 );
 
 export const jobFormReducer = combineReducers({
