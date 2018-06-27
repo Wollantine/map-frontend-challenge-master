@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import { isGeocode, geocodeOrError, geocodeAddress } from '../geocode';
 import { Either } from 'tsmonad/lib/src';
 import { EErrorType } from '../jobsApi';
-import { promises } from 'fs';
 
 describe('geocode', () => {
     describe('isGeocode', () => {
