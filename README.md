@@ -1,5 +1,26 @@
 Map frontend challenge
 =========================
+# Usage
+
+### Start
+
+In order to execute the demo, clone this repo and execute: 
+```
+yarn start
+```
+This will start both the API and the Front-end.
+
+### Unit tests
+```
+yarn test
+```
+
+### Type checking with Typescript
+```
+yarn typecheck
+```
+
+# Problem
 
 Create a `React.js` app that allows users to create jobs.
 

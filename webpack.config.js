@@ -18,7 +18,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Stuart Frontend Challenge Master',
+      title: 'Map Frontend Challenge Master',
       favicon: './assets/dropOffBadgePresent.svg'
     })
   ],
