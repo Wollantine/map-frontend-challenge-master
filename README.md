@@ -18,7 +18,7 @@ yarn test
 ### Type checking with Typescript
 ```
 yarn typecheck
-```
+```
 
 # Problem
 
