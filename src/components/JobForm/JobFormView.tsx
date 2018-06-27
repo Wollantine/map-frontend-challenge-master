@@ -24,14 +24,14 @@ const Div = createComponent(() => ({
     width: '300px',
     backgroundColor: 'white',
     padding: '16px',
-    marginTop: '32px',
-    marginLeft: '32px',
+    top: '32px',
+    left: '32px',
     borderRadius: '8px',
-    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.10)',
     position: 'fixed',
+    boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.10)',
     ':hover,:focus': {
-        boxShadow: '0 1px 8px 0 rgba(0,0,0,0.10)'
-    }
+        boxShadow: '0 1px 8px 0 rgba(0, 0, 0, 0.10)'
+    },
 }));
 
 

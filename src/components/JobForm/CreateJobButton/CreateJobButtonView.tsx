@@ -14,7 +14,7 @@ const ButtonContainer = createComponent(() => ({
 const Button = createComponent(({disabled}) => ({
     borderRadius: '4px',
     height: '40px',
-    textShadow: '0 1px 2px 0 rgba(16,162,234,0.30)',
+    textShadow: '1px 2px rgba(16,162,234,0.30)',
     background: 'linear-gradient(#10A2EA, #0F99E8)',
     color: 'white',
     border: 'none',
